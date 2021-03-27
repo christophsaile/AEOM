@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text, StyleSheet, View, Image } from 'react-native';
+import { Text, StyleSheet, View, Image, ScrollView } from 'react-native';
 import Markdown from 'react-native-markdown-display';
 
 import Headline from './Headline';
 
-const BlogPost = ({ article }) => {
-  const { headline, description, img } = article.fields;
+const BlogPost = ({ data }) => {
+  const { headline, description, img, author } = data.fields;
 
   return (
     <View>

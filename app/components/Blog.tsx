@@ -1,12 +1,27 @@
-import React from 'react';
-import { Text, StyleSheet, View, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+
+import { client } from '../config/contentfulClient';
 import BlogPost from './BlogPost';
 
-const Blog = ({ posts }) => {
+const Blog = () => {
+  const [blogData, setBlogData] = useState([]);
+
+  useEffect(() => {
+    client
+      .getEntries({
+        content_type: 'blogPost',
+      })
+      .then((response) => {
+        setBlogData(response.items);
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <View>
-      {posts.map((article, index: number) => (
-        <BlogPost article={article} key={index} />
+      {blogData.map((article, index: number) => (
+        <BlogPost key={index} data={article} />
       ))}
     </View>
   );
