@@ -89,7 +89,7 @@ Der Aufwand für die Einarbeitung ist abhängig davon welches der Entwickler ber
 
 - Markup: Im Vergleich zu einer herkömmlichen React Componente kann bei React Native nicht mit HTML-Elementen gearbeitet werden. Das liegt daran, dass das Ziel nicht der Browser ist, sondern eine Native App. Anstelle von HTML-Elementen müssen die React Native Core Componenten genutzt werden.
 - Styling: In React Native werden Componenten nicht mit CSS gestyled sondern mit JavaScript.
-  ![styling](./documentation/styling.png 'styling')
+  ![styles](./documentation/styles.png 'styles')
 - Debugging: Bei einer React Native Anwendung kann nicht auf die DOM - Elemente wie bei einer Webapp zugegriffen werden. Es gibt lediglich eine Debug Console.
 
 ### Contentful
