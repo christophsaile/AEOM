@@ -4,13 +4,13 @@
 
 React Native ist ein Framework, dass es ermöglicht, plattformübergreifende Native Apps zu entwickeln. Es baut auf dem React Framework auf und kompiliert JavaScript in die jeweilige Native Programmiersprache. Dadurch wird ausschließlich eine Codebase für mehrere Plattformen benötigt.
 
-## Was ist ein Headless CMS / Contentful?
+## Was ist ein Headless CMS (Contentful)?
 
 Bei einem Headless CMS wird im Vergleich zu einem traditionellen CMS das Frontend (Head) vom Backend getrennt. Dies hat zur Folge, dass ein Headless CMS keine Darstellungsebene besitzt, sondern lediglich eine Inhaltsebene. Durch den Wegfall der Darstellungsebene ist es möglich, mehrere Kanäle (Heads) zu bedienen. Die Auslieferung von neuen Inhalten und Daten erfolgt über eine RESTful-API, welche von unterschiedlichen Programmiersprachen abgerufen werden kann.
 
 ## Welche Erfahrungen haben Sie mit den Technologien gemacht?
 
-Bisher konnte ich noch keine Erfahrungen mit React Native und Contentful sammeln, allerdings habe ich mich schon etwas mit React.js beschäftigt.
+Bisher konnte ich noch keine Erfahrungen mit React Native und Contentful sammeln, allerdings habe ich bereits Vorkenntnisse in React.js.
 
 ## Wie weit sind Sie mit der Einarbeitung?
 
@@ -18,8 +18,8 @@ Bisher konnte ich noch keine Erfahrungen mit React Native und Contentful sammeln
 - Emulator installiert
 - Contentful Konto erstellt
 - Content Types in Contentful erstellt
-- Contentful in React Native Projekt intigiriert
-- Daten von Contentful erfolgreich in Application gefetched und gerendert
+- Contentful in ein React Native Projekt intigiriert
+- Daten von Contentful erfolgreich in React Native Application gefetched und gerendert
 
 ## Ist die zu den Technologien vorhandene Dokumentation hinreichend?
 
@@ -32,7 +32,7 @@ Die Dokumentation für React Native und Contentful ist sehr gut.
 ## Ist die Community rund um diese Technologien lebendig?
 
 Die Community rund um React Native ist sehr lebendig, es gibt unzählige Stackoverflow Einträge oder Medium Posts.
-Bei Contentful ist die Community nicht ganz so lebendig, allerdings bis jetzt auftretende Probleme mithilfe der Dokumentation lösen.
+Bei Contentful ist die Community nicht ganz so lebendig, wie bei React.js.
 
 ## Wie hoch ist der Aufwand für die Installation?
 
@@ -93,7 +93,7 @@ Der API Key und die Space ID können in den Contentful Settings unter dem Punkt 
 
 ### React Native
 
-Der Aufwand für die Einarbeitung ist abhängig davon welches der Entwickler bereits hat. Sind ihm die Konzepte von React.js bereits bekannt ist eine Einarbeitung in React Native deutlich einfacher. Da es sich bei React Native um Komponenten handelt welche in Native Code compiliert werden gibt es Unterschiede in den Folgenden Bereichen
+Der Aufwand für die Einarbeitung ist abhängig davon, welche Kenntnisse der Entwickler bereits hat. Sind ihm die Konzepte von React.js bereits bekannt, ist eine Einarbeitung in React Native deutlich einfacher. Da es sich bei React Native um Komponenten handelt die in Nativen Code compiliert werden, gibt es Unterschiede in den folgenden Bereichen:
 
 - Markup: Im Vergleich zu einer herkömmlichen React Componente kann bei React Native nicht mit HTML-Elementen gearbeitet werden. Das liegt daran, dass das Ziel nicht der Browser ist, sondern eine Native App. Anstelle von HTML-Elementen müssen die React Native Core Componenten genutzt werden.
 
@@ -168,7 +168,7 @@ Der Aufwand für die Einarbeitung ist abhängig davon welches der Entwickler ber
   });
   ```
 
-- Debugging: Bei einer React Native Anwendung kann nicht auf die DOM - Elemente wie bei einer Webapp zugegriffen werden. Es gibt lediglich eine Debug Console.
+- Debugging: Bei einer React Native Anwendung kann nicht auf die DOM - Elemente wie bei einer WebApp zugegriffen werden. Es gibt lediglich eine Debug Console.
 
 ### Contentful
 
