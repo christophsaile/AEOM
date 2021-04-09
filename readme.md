@@ -1,5 +1,13 @@
 # Checkliste Status-Meeting
 
+## Was ist React Native?
+
+React Native ist ein Framework, dass es ermöglicht, plattformübergreifende Native Apps zu entwickeln. Es baut auf dem React Framework auf und kompiliert JavaScript in die jeweilige Native Programmiersprache. Dadurch wird ausschließlich eine Codebase für mehrere Plattformen benötigt.
+
+## Was ist ein Headless CMS / Contentful?
+
+Bei einem Headless CMS wird im Vergleich zu einem traditionellen CMS das Frontend (Head) vom Backend getrennt. Dies hat zur Folge, dass ein Headless CMS keine Darstellungsebene besitzt, sondern lediglich eine Inhaltsebene. Durch den Wegfall der Darstellungsebene ist es möglich, mehrere Kanäle (Heads) zu bedienen. Die Auslieferung von neuen Inhalten und Daten erfolgt über eine RESTful-API, welche von unterschiedlichen Programmiersprachen abgerufen werden kann.
+
 ## Welche Erfahrungen haben Sie mit den Technologien gemacht?
 
 Bisher konnte ich noch keine Erfahrungen mit React Native und Contentful sammeln, allerdings habe ich mich schon etwas mit React.js beschäftigt.
@@ -89,7 +97,7 @@ Der Aufwand für die Einarbeitung ist abhängig davon welches der Entwickler ber
 
 - Markup: Im Vergleich zu einer herkömmlichen React Componente kann bei React Native nicht mit HTML-Elementen gearbeitet werden. Das liegt daran, dass das Ziel nicht der Browser ist, sondern eine Native App. Anstelle von HTML-Elementen müssen die React Native Core Componenten genutzt werden.
 
-  **Headline Componente React**
+  **Headline Component React**
 
   ```JSX
   /* headline.tsx */
@@ -108,7 +116,7 @@ Der Aufwand für die Einarbeitung ist abhängig davon welches der Entwickler ber
   };
   ```
 
-  **Headline Componente React Native**
+  **Headline Component React Native**
 
   ```JSX
   /* headline.tsx */
@@ -164,4 +172,17 @@ Der Aufwand für die Einarbeitung ist abhängig davon welches der Entwickler ber
 
 ### Contentful
 
-Die Bedienung von Contentful ist sehr intuitiv. Es lassen sich sehr schnell die ersten Content Types erstellen. Das Fetchen der Daten erfolgt über
+Die Bedienung von Contentful ist sehr intuitiv und es lassen sich einfach die ersten Content Types erstellen. Die erstellen Content Types lassen sich über die "Content Delivery API" mit nur wenigen Zeilen Code fetchen.
+
+**Daten Fetchen des Content Types "blogPost"**
+
+```Javascript
+client
+  .getEntries({
+    content_type: 'blogPost',
+  })
+  .then((response) => {
+    console.log(response.items);
+  })
+  .catch(console.error);
+```
