@@ -1,4 +1,4 @@
-import { EntryCollection, ContentfulClientApi } from 'contentful';
+import { ContentfulClientApi } from 'contentful';
 // @ts-ignore
 import { CONTENTFUL_SPACEID, CONTENTFUL_TOKEN, CONTENTFUL_ENVIRONMENT } from '@env';
 // @ts-ignore
