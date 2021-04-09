@@ -88,8 +88,78 @@ Der API Key und die Space ID können in den Contentful Settings unter dem Punkt 
 Der Aufwand für die Einarbeitung ist abhängig davon welches der Entwickler bereits hat. Sind ihm die Konzepte von React.js bereits bekannt ist eine Einarbeitung in React Native deutlich einfacher. Da es sich bei React Native um Komponenten handelt welche in Native Code compiliert werden gibt es Unterschiede in den Folgenden Bereichen
 
 - Markup: Im Vergleich zu einer herkömmlichen React Componente kann bei React Native nicht mit HTML-Elementen gearbeitet werden. Das liegt daran, dass das Ziel nicht der Browser ist, sondern eine Native App. Anstelle von HTML-Elementen müssen die React Native Core Componenten genutzt werden.
+
+  **Headline Componente React**
+
+  ```JSX
+  /* headline.tsx */
+  import React from 'react';
+
+  type Props = {
+    title: string;
+  };
+
+  const Headline = (props: Props) => {
+    return (
+    <div className="Headline__container">
+      <h1 className="Headline__text">{props.title}</h1>
+    <div>;
+    )
+  };
+  ```
+
+  **Headline Componente React Native**
+
+  ```JSX
+  /* headline.tsx */
+  import React from 'react';
+  import {Text, View} from 'react-native';
+
+  type Props = {
+    title: string;
+  };
+
+  const Headline = (props) => {
+    return (
+    <View style={styles.headline__container}>
+      <Text style={styles.headline__text}>{props.title}</Text>
+    <View>;
+    )
+  };
+  ```
+
 - Styling: In React Native werden Componenten nicht mit CSS gestyled sondern mit JavaScript.
-  ![styles](./documentation/styles.png 'styles')
+
+  **Styling React**
+
+  ```CSS
+  /* headline.css */
+  .headline__container {
+    background-color: '#000'
+  }
+
+  .headline__text {
+    font-size: 30px
+  }
+  ```
+
+  **Styling React Native**
+
+  ```JSX
+  /* headline.tsx */
+  import React from 'react';
+  import {StyleSheet} from 'react-native';
+
+  const styles = StyleSheet.create({
+    headline__container: {
+      backgroundColor: '#000'
+    },
+    headline__text: {
+      fontSize: 30,
+    },
+  });
+  ```
+
 - Debugging: Bei einer React Native Anwendung kann nicht auf die DOM - Elemente wie bei einer Webapp zugegriffen werden. Es gibt lediglich eine Debug Console.
 
 ### Contentful
