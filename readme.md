@@ -41,13 +41,13 @@ Zum einen über die Expo CLI und zum anderen über die React Native CLI.
 
 ### React Native
 
-- React Native CLI
+- **React Native CLI**
 
   Die React Native CLI wird empfolen, wenn in einem Projekt neben Javascript auch mit Nativem Code gearbeitet werden soll / muss. Außerdem wird die React Native CLI empfolen, wenn React Native in eine bereits bestehende Application eingebunden werden soll.
 
   Die Installation über die React Native CLI ist aufwändig, da abhängig von der jeweiligen Plattform Android Studios und / oder XCode installiert werden muss.
 
-- Expo CLI
+- **Expo CLI**
 
   Da ich vorerst aussließlich mit Javascript / Typescript arbeite, habe ich mich für die Expo CLI entschieden. Die Expo CLI ermöglicht es innerhalb weniger Minuten ein Projekt zu erstellen und zu starten. Dazu müssen die folgenden Befehle ausgeführt werden (Node Version 12 LTS oder größer wird vorausgesetzt):
 
@@ -95,7 +95,7 @@ Der API Key und die Space ID können in den Contentful Settings unter dem Punkt 
 
 Der Aufwand für die Einarbeitung ist abhängig davon, welche Kenntnisse der Entwickler bereits hat. Sind ihm die Konzepte von React.js bereits bekannt, ist eine Einarbeitung in React Native deutlich einfacher. Da es sich bei React Native um Komponenten handelt die in Nativen Code compiliert werden, gibt es Unterschiede in den folgenden Bereichen:
 
-- Markup: Im Vergleich zu einer herkömmlichen React Componente kann bei React Native nicht mit HTML-Elementen gearbeitet werden. Das liegt daran, dass das Ziel nicht der Browser ist, sondern eine Native App. Anstelle von HTML-Elementen müssen die React Native Core Componenten genutzt werden.
+- **Markup:** Im Vergleich zu einer herkömmlichen React Componente kann bei React Native nicht mit HTML-Elementen gearbeitet werden. Das liegt daran, dass das Ziel nicht der Browser ist, sondern eine Native App. Anstelle von HTML-Elementen müssen die React Native Core Componenten genutzt werden.
 
   **Headline Component React**
 
@@ -136,7 +136,7 @@ Der Aufwand für die Einarbeitung ist abhängig davon, welche Kenntnisse der Ent
   };
   ```
 
-- Styling: In React Native werden Componenten nicht mit CSS gestyled sondern mit JavaScript.
+- **Styling:** In React Native werden Componenten nicht mit CSS gestyled sondern mit JavaScript.
 
   **Styling React**
 
@@ -168,7 +168,7 @@ Der Aufwand für die Einarbeitung ist abhängig davon, welche Kenntnisse der Ent
   });
   ```
 
-- Debugging: Bei einer React Native Anwendung kann nicht auf die DOM - Elemente wie bei einer WebApp zugegriffen werden. Es gibt lediglich eine Debug Console.
+- **Debugging:** Bei einer React Native Anwendung kann nicht auf die DOM - Elemente wie bei einer WebApp zugegriffen werden. Es gibt lediglich eine Debug Console.
 
 ### Contentful
 
