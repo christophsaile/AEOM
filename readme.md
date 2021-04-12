@@ -111,7 +111,7 @@ Der Aufwand für die Einarbeitung ist abhängig davon, welche Kenntnisse der Ent
     return (
     <div className="Headline__container">
       <h1 className="Headline__text">{props.title}</h1>
-    <div>;
+    </div>;
     )
   };
   ```
@@ -131,7 +131,7 @@ Der Aufwand für die Einarbeitung ist abhängig davon, welche Kenntnisse der Ent
     return (
     <View style={styles.headline__container}>
       <Text style={styles.headline__text}>{props.title}</Text>
-    <View>;
+    </View>;
     )
   };
   ```
