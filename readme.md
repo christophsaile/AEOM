@@ -2,7 +2,9 @@
 
 ## Was ist React Native?
 
-React Native ist ein Framework, dass es ermöglicht, plattformübergreifende Native Apps zu entwickeln. Es baut auf dem React Framework auf und kompiliert JavaScript in die jeweilige Native Programmiersprache. Dadurch wird ausschließlich eine Codebase für mehrere Plattformen benötigt.
+React Native ist ein Framework das auf React.js aufbaut. Das Framework ermöglicht es plattformübergreifende, Native Apps mit JavaScript zu entwickeln. Der JavaScript Code wird allerdings dabei nicht in Nativen Code kompiliert, sondern kommuniziert über eine sogenannte "Bridge" mit den Nativen Core Components von React Native.
+![react-native](./documentation/react-native.png 'react-native')
+Durch diese Arbeitsweise wird lediglich eine Codebase für die verschiedenen Plattformen benötigt.
 
 ## Was ist ein Headless CMS (Contentful)?
 
