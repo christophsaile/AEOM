@@ -1,9 +1,15 @@
 # Checkliste Status-Meeting
 
+## Anwendungsfall
+
+Als Anwendungsfall habe ich an einen Blog gedacht, welcher mithilfe des Headless CMS (Contentful) von einem Editor gepflegt und auf mehrere Plattformen (mit React Native) veröffentlicht werden kann. Der Editor soll die Möglichkeit haben, bestehenden Inhalte zu bearbeiten und neue Inhalte wie bspw. Blog Posts zu erstellen.
+
 ## Was ist React Native?
 
 React Native ist ein Framework das auf React.js aufbaut. Das Framework ermöglicht es plattformübergreifende, Native Apps mit JavaScript zu entwickeln. Der JavaScript Code wird allerdings dabei nicht in Nativen Code kompiliert, sondern kommuniziert über eine sogenannte "Bridge" mit den Nativen Core Components von React Native.
 ![react-native](./documentation/react-native.png 'react-native')
+Weitere Informationen wie [React Native Under The Hood](https://hackernoon.com/understanding-react-native-bridge-concept-e9526066ddb8) funktioniert.
+
 Durch diese Arbeitsweise wird lediglich eine Codebase für die verschiedenen Plattformen benötigt.
 
 ## Was ist ein Headless CMS (Contentful)?
