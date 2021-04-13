@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
+import colors from '../config/colors';
 
 type Props = {
   title: string;
@@ -11,7 +12,9 @@ const Headline = (props: Props) => {
 
 const styles = StyleSheet.create({
   headline: {
-    fontSize: 30,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.black,
   },
 });
 
