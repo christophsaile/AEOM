@@ -6,7 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 
 const Article = ({ data }) => {
   const navigation = useNavigation();
-  const { img, category, published, headline } = data.fields;
+  const { image, category, headline, sys } = data.fields;
+  const { createdAt } = data.sys;
 
   return (
     <TouchableHighlight
@@ -15,10 +16,10 @@ const Article = ({ data }) => {
       onPress={() => navigation.navigate('ArticleDetailScreen', data)}
     >
       <View style={styles.article}>
-        <Image style={styles.img} source={{ uri: 'https:' + img.fields.file.url }} />
+        <Image style={styles.img} source={{ uri: 'https:' + image.fields.file.url }} />
         <View style={styles.header}>
           <Text>{category}</Text>
-          <Text>{published}</Text>
+          <Text>{createdAt}</Text>
         </View>
         <Text style={styles.headline}>{headline}</Text>
         <View style={styles.footer}>{/* <Text></Text>

@@ -12,7 +12,7 @@ const ArticleOverviewScreen = ({ navigation }) => {
   useEffect(() => {
     client
       .getEntries({
-        content_type: 'blogPost',
+        content_type: 'article',
       })
       .then((response) => {
         setContentData(response.items);
