@@ -8,7 +8,7 @@ Als Anwendungsfall habe ich an einen Blog gedacht, welcher mithilfe des Headless
 
 React Native ist ein Framework das auf React.js aufbaut. Das Framework ermöglicht es plattformübergreifende, Native Apps mit JavaScript zu entwickeln. Der JavaScript Code wird allerdings dabei nicht in Nativen Code kompiliert, sondern kommuniziert über eine sogenannte "Bridge" mit den Nativen Core Components von React Native.
 ![react-native](./documentation/react-native.png 'react-native')
-![react-native-bride](./documentation/react-native-bridge.png 'react-native-bridge')
+![react-native-bridge](./documentation/react-native-bridge.png 'react-native-bridge')
 Quellen: [Deep Dive Into React Native](https://www.youtube.com/watch?v=ZwX3i3e1Vfs) & [React Native Under The Hood](https://hackernoon.com/understanding-react-native-bridge-concept-e9526066ddb8)
 
 Durch diese Arbeitsweise wird lediglich eine Codebase für die verschiedenen Plattformen benötigt.
