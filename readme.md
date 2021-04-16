@@ -71,7 +71,11 @@ Zum einen über die Expo CLI und zum anderen über die React Native CLI.
 
   ![expo-cli](./documentation/expo-cli.png 'expo-cli')
 
-  Wurde das Projekt erfolgreich aufgesetzt kann mit dem Befehl `npm start` das Projekt gestartet werden. Mithilfe der iOS und Android App [Expo](https://expo.io), kann das Projekt direkt auf das eigene Handy deployed werden. Alternativ kann hierfür ein Emulator verwendet werden.
+  Wurde das Projekt erfolgreich aufgesetzt kann mit dem Befehl `npm start` das Projekt gestartet werden. Mithilfe der iOS und Android App [Expo](https://expo.io), kann das Projekt direkt auf das eigene Handy deployed werden. Dies funktioniert wie folgt:
+  ![expo-app](./documentation/expo.png 'expo-app')
+  Quelle: [Expo Documentation](https://docs.expo.io/guides/how-expo-works/)
+
+  Als Alternativ kann hierfür auch ein Emulator verwendet werden. Um einen Emulator zu verwenden muss allerdings XCode und / oder Android Studio installiert werden.
 
 ### Contentful
 
