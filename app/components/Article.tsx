@@ -3,11 +3,17 @@ import { StyleSheet, View, Image, Text } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import colors from '../config/colors';
 import { useNavigation } from '@react-navigation/native';
+import { Asset } from 'contentful';
 
-const Article = ({ data }) => {
+type Props = {
+  image: Asset;
+  category: string;
+  headline: string;
+  createdAt: string;
+};
+
+const Article = ({ ...data }: Props) => {
   const navigation = useNavigation();
-  const { image, category, headline, sys } = data.fields;
-  const { createdAt } = data.sys;
 
   return (
     <TouchableHighlight
@@ -16,12 +22,12 @@ const Article = ({ data }) => {
       onPress={() => navigation.navigate('ArticleDetailScreen', data)}
     >
       <View style={styles.article}>
-        <Image style={styles.img} source={{ uri: 'https:' + image.fields.file.url }} />
+        <Image style={styles.img} source={{ uri: 'https:' + data.image.fields.file.url }} />
         <View style={styles.header}>
-          <Text>{category}</Text>
-          <Text>{createdAt}</Text>
+          <Text>{data.category}</Text>
+          <Text>{data.createdAt}</Text>
         </View>
-        <Text style={styles.headline}>{headline}</Text>
+        <Text style={styles.headline}>{data.headline}</Text>
         <View style={styles.footer}>{/* <Text></Text>
         <Image></Image> */}</View>
       </View>

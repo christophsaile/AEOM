@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import { EntryCollection } from 'contentful';
 
 import { client } from '../config/contentfulClient';
 import colors from '../config/colors';
 import Article from '../components/Article';
+import { IArticle, IArticleFields } from '../../@types/generated/contentful';
 
 const ArticleOverviewScreen = ({ navigation }) => {
-  const [contentData, setContentData] = useState([]);
+  const [contentfulData, setContentfulData] = useState<null | EntryCollection<IArticleFields>>(
+    null
+  );
 
   useEffect(() => {
     client
-      .getEntries({
+      .getEntries<IArticleFields>({
         content_type: 'article',
       })
       .then((response) => {
-        setContentData(response.items);
+        setContentfulData(response);
       })
       .catch(console.error);
   }, []);
@@ -24,8 +28,15 @@ const ArticleOverviewScreen = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.white }}>
       <Text>AOEM</Text>
       <FlatList
-        data={contentData}
-        renderItem={({ item }) => <Article data={item} />}
+        data={contentfulData?.items}
+        renderItem={({ item }) => (
+          <Article
+            image={item.fields.image}
+            category={item.fields.category}
+            headline={item.fields.headline}
+            createdAt={item.sys.createdAt}
+          />
+        )}
         keyExtractor={(item, index) => 'key' + index}
       />
     </SafeAreaView>
