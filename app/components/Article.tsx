@@ -4,12 +4,14 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 import colors from '../config/colors';
 import { useNavigation } from '@react-navigation/native';
 import { Asset } from 'contentful';
+import { Document } from '@contentful/rich-text-types';
 
 type Props = {
   image: Asset;
   category: string;
   headline: string;
   createdAt: string;
+  text: Document;
 };
 
 const Article = ({ ...data }: Props) => {

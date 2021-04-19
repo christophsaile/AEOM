@@ -3,10 +3,10 @@ import { SafeAreaView, Text } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { EntryCollection } from 'contentful';
 
+import { IArticleFields } from '../types/generated/contentful';
 import { client } from '../config/contentfulClient';
 import colors from '../config/colors';
 import Article from '../components/Article';
-import { IArticle, IArticleFields } from '../../@types/generated/contentful';
 
 const ArticleOverviewScreen = ({ navigation }) => {
   const [contentfulData, setContentfulData] = useState<null | EntryCollection<IArticleFields>>(
@@ -35,6 +35,7 @@ const ArticleOverviewScreen = ({ navigation }) => {
             category={item.fields.category}
             headline={item.fields.headline}
             createdAt={item.sys.createdAt}
+            text={item.fields.text}
           />
         )}
         keyExtractor={(item, index) => 'key' + index}

@@ -1,5 +1,4 @@
 import { ContentfulClientApi } from 'contentful';
-// @ts-ignore
 import { CONTENTFUL_SPACEID, CONTENTFUL_TOKEN, CONTENTFUL_ENVIRONMENT } from '@env';
 // @ts-ignore
 import { createClient } from 'contentful/dist/contentful.browser.min.js';

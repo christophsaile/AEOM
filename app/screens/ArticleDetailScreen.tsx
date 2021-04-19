@@ -1,13 +1,15 @@
 import React from 'react';
 import { SafeAreaView, Text, Image, StyleSheet, View, ScrollView } from 'react-native';
-import Markdown from 'react-native-markdown-display';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+
+// @ts-ignore
+import { contentfulRichTextToReactNative } from '../helpers/contentfulRichTextToReactNative';
 import colors from '../config/colors';
 
 const ArticleDetailScreen = ({ navigation, route }) => {
   const data = route.params;
-  const { image, category, headline, text } = data.fields;
-  console.log(text);
+  const { image, category, headline, text, createdAt } = data;
 
   return (
     <SafeAreaView style={{ backgroundColor: colors.white }}>
@@ -24,10 +26,10 @@ const ArticleDetailScreen = ({ navigation, route }) => {
         <Image style={styles.img} source={{ uri: 'https:' + image.fields.file.url }} />
         <View style={styles.header}>
           <Text>{category}</Text>
-          <Text>Vor 31 min</Text>
+          <Text>{createdAt}</Text>
         </View>
         <Text style={styles.headline}>{headline}</Text>
-        <Markdown>{'test'}</Markdown>
+        {documentToReactComponents(text, contentfulRichTextToReactNative)}
       </ScrollView>
     </SafeAreaView>
   );
