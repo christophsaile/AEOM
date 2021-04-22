@@ -8,7 +8,7 @@ import { client } from '../config/contentfulClient';
 import colors from '../config/colors';
 import Article from '../components/Article';
 
-const ArticleOverviewScreen = ({ navigation }) => {
+const ArticleOverviewScreen = () => {
   const [contentfulData, setContentfulData] = useState<null | EntryCollection<IArticleFields>>(
     null
   );
@@ -38,7 +38,7 @@ const ArticleOverviewScreen = ({ navigation }) => {
             text={item.fields.text}
           />
         )}
-        keyExtractor={(item, index) => 'key' + index}
+        keyExtractor={(item) => item.sys.id}
       />
     </SafeAreaView>
   );

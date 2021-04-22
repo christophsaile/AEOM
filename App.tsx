@@ -2,13 +2,27 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Asset } from 'contentful';
+import { Document } from '@contentful/rich-text-types';
 
 import colors from './app/config/colors';
 import ArticleOverviewScreen from './app/screens/ArticleOverviewScreen';
 import ArticleDetailScreen from './app/screens/ArticleDetailScreen';
 import BottomNavigator from './app/navigation/BottomNavigation';
 
-const Stack = createStackNavigator();
+export type StackParamList = {
+  Home: undefined;
+  ArticleOverviewScreen: undefined;
+  ArticleDetailScreen: {
+    image: Asset;
+    category: string;
+    headline: string;
+    createdAt: string;
+    text: Document;
+  };
+};
+
+const Stack = createStackNavigator<StackParamList>();
 
 export default function App() {
   return (

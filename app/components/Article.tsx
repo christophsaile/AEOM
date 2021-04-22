@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import colors from '../config/colors';
 import { useNavigation } from '@react-navigation/native';
 import { Asset } from 'contentful';
 import { Document } from '@contentful/rich-text-types';
+
+import colors from '../config/colors';
 
 type Props = {
   image: Asset;

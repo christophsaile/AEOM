@@ -53,7 +53,7 @@ export const contentfulRichTextToReactNative = {
     [BLOCKS.UL_LIST]: (_node, children) => {
       return children.map((child, i) => {
         return (
-          <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <View key={i} style={{ display: 'flex', flexDirection: 'row' }}>
             <Text>{'\u2022'}</Text>
             <Text style={{ flex: 1, paddingLeft: 5 }}>{child}</Text>
           </View>
@@ -63,7 +63,7 @@ export const contentfulRichTextToReactNative = {
     [BLOCKS.OL_LIST]: (_node, children) => {
       return children.map((child, i) => {
         return (
-          <View style={{ display: 'flex', flexDirection: 'row' }}>
+          <View key={i} style={{ display: 'flex', flexDirection: 'row' }}>
             <Text>{i + 1 + '.'}</Text>
             <Text style={{ flex: 1, paddingLeft: 5 }}>{child}</Text>
           </View>

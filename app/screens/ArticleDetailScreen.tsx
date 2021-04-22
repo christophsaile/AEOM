@@ -6,10 +6,13 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 // @ts-ignore
 import { contentfulRichTextToReactNative } from '../helpers/contentfulRichTextToReactNative';
 import colors from '../config/colors';
+import { StackScreenProps } from '@react-navigation/stack';
+import { StackParamList } from '../../App';
 
-const ArticleDetailScreen = ({ navigation, route }) => {
-  const data = route.params;
-  const { image, category, headline, text, createdAt } = data;
+type Props = StackScreenProps<StackParamList, 'ArticleDetailScreen'>;
+
+const ArticleDetailScreen = ({ navigation, route }: Props) => {
+  const { image, category, headline, text, createdAt } = route.params;
 
   return (
     <SafeAreaView style={{ backgroundColor: colors.white }}>
