@@ -6,7 +6,6 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 // @ts-ignore
 import { contentfulRichTextToReactNative } from '../helpers/contentfulRichTextToReactNative';
 import colors from '../config/colors';
-import fontSize from '../config/fontSize';
 import { StackScreenProps } from '@react-navigation/stack';
 import { StackParamList } from '../../App';
 import Headline from '../components/Headline';
