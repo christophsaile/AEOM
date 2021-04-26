@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 
 import fontSize from '../config/fontSize';
+import Headline from '../components/Headline';
 
 export const contentfulRichTextToReactNative = {
   renderMark: {
@@ -27,29 +28,23 @@ export const contentfulRichTextToReactNative = {
       return null;
     },
     [BLOCKS.PARAGRAPH]: (_node, children) => {
-      return <Text>{children}</Text>;
+      return (
+        <Text
+          style={{ fontSize: fontSize.text, lineHeight: fontSize.text * 1.4, marginBottom: 10 }}
+        >
+          {children}
+        </Text>
+      );
     },
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
       return null;
     },
-    [BLOCKS.HEADING_1]: (_node, children) => (
-      <Text style={{ fontSize: fontSize.h1 }}>{children}</Text>
-    ),
-    [BLOCKS.HEADING_2]: (_node, children) => (
-      <Text style={{ fontSize: fontSize.h2 }}>{children}</Text>
-    ),
-    [BLOCKS.HEADING_3]: (_node, children) => (
-      <Text style={{ fontSize: fontSize.h3 }}>{children}</Text>
-    ),
-    [BLOCKS.HEADING_4]: (_node, children) => (
-      <Text style={{ fontSize: fontSize.h4 }}>{children}</Text>
-    ),
-    [BLOCKS.HEADING_5]: (_node, children) => (
-      <Text style={{ fontSize: fontSize.h4 }}>{children}</Text>
-    ),
-    [BLOCKS.HEADING_6]: (_node, children) => (
-      <Text style={{ fontSize: fontSize.h4 }}>{children}</Text>
-    ),
+    [BLOCKS.HEADING_1]: (_node, children) => <Headline title={children} typeOfHeadline={'h1'} />,
+    [BLOCKS.HEADING_2]: (_node, children) => <Headline title={children} typeOfHeadline={'h2'} />,
+    [BLOCKS.HEADING_3]: (_node, children) => <Headline title={children} typeOfHeadline={'h3'} />,
+    [BLOCKS.HEADING_4]: (_node, children) => <Headline title={children} typeOfHeadline={'h4'} />,
+    [BLOCKS.HEADING_5]: (_node, children) => <Headline title={children} typeOfHeadline={'h4'} />,
+    [BLOCKS.HEADING_6]: (_node, children) => <Headline title={children} typeOfHeadline={'h4'} />,
     [BLOCKS.UL_LIST]: (_node, children) => {
       return children.map((child, i) => {
         return (
