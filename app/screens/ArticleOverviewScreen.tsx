@@ -1,31 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text } from 'react-native';
-import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView, StyleSheet, View, Text, FlatList } from 'react-native';
 import { EntryCollection } from 'contentful';
 
 import { IArticleFields } from '../types/generated/contentful';
 import { client } from '../config/contentfulClient';
 import colors from '../config/colors';
 import Article from '../components/Article';
-import fontSize from '../config/fontSize';
 import Headline from '../components/Headline';
-import { color } from 'react-native-reanimated';
 
 const ArticleOverviewScreen = () => {
   const [contentfulData, setContentfulData] = useState<null | EntryCollection<IArticleFields>>(
     null
   );
+  const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
+  const getContentfulData = () => {
     client
       .getEntries<IArticleFields>({
         content_type: 'article',
       })
       .then((response) => {
         setContentfulData(response);
+        setRefreshing(false);
       })
       .catch(console.error);
-  }, []);
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    getContentfulData();
+  };
 
   const mainHeadline = () => {
     return (
@@ -34,6 +38,10 @@ const ArticleOverviewScreen = () => {
       </Text>
     );
   };
+
+  useEffect(() => {
+    getContentfulData();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -51,6 +59,8 @@ const ArticleOverviewScreen = () => {
         keyExtractor={(item) => item.sys.id}
         ListHeaderComponent={mainHeadline}
         showsVerticalScrollIndicator={false}
+        refreshing={refreshing}
+        onRefresh={() => onRefresh()}
       />
     </SafeAreaView>
   );
