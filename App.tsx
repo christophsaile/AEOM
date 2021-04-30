@@ -19,6 +19,7 @@ export type StackParamList = {
     headline: string;
     createdAt: string;
     text: Document;
+    id: string;
   };
 };
 

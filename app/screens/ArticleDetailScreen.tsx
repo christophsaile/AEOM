@@ -13,7 +13,7 @@ import Headline from '../components/Headline';
 type Props = StackScreenProps<StackParamList, 'ArticleDetailScreen'>;
 
 const ArticleDetailScreen = ({ navigation, route }: Props) => {
-  const { image, category, headline, text, createdAt } = route.params;
+  const { image, category, headline, text, createdAt, id } = route.params;
 
   return (
     <SafeAreaView style={styles.articleDetail}>

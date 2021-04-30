@@ -54,6 +54,7 @@ const ArticleOverviewScreen = () => {
             headline={item.fields.headline}
             createdAt={item.sys.createdAt}
             text={item.fields.text}
+            id={item.sys.id}
           />
         )}
         keyExtractor={(item) => item.sys.id}
