@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Image, Text, Share } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Image, Text, Share, Button } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { Asset } from 'contentful';
@@ -8,10 +8,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import colors from '../config/colors';
 import fontSize from '../config/fontSize';
-import { saveArticle, deleteArticle } from '../helpers/bookmarkAtricle';
+import { saveArticle, deleteArticle, getAllArticles } from '../helpers/bookmarkAtricle';
 import { useNonInitialEffect } from '../helpers/useNonInitalEffectHook';
 
-type Props = {
+export type ArticleProps = {
   image: Asset;
   category: string;
   headline: string;
@@ -20,10 +20,21 @@ type Props = {
   id: string;
 };
 
-const Article = ({ ...data }: Props) => {
+const Article = ({ ...data }: ArticleProps) => {
   const navigation = useNavigation();
-  const [bookmark, setBookmark] = useState(false); //check if article is saved or not in local store -> set true or false then
 
+  const checkIfArticleIsBookmarked = (): boolean => {
+    let returnValue: boolean = false;
+    getAllArticles().then((response) => {
+      if (typeof response === 'string') {
+        const arryResponse: string[] = JSON.parse(response);
+        returnValue = arryResponse.includes(data.id);
+      }
+    });
+    return returnValue;
+  };
+
+  const [bookmark, setBookmark] = useState(checkIfArticleIsBookmarked);
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -41,6 +52,14 @@ const Article = ({ ...data }: Props) => {
 
   return (
     <View style={styles.article}>
+      <Button
+        title='show storage'
+        onPress={() => {
+          getAllArticles().then((token) => {
+            console.log(token);
+          });
+        }}
+      />
       <TouchableHighlight
         underlayColor={colors.white}
         activeOpacity={0.9}
