@@ -10,7 +10,11 @@ const BookmarkScreen = () => {
 
   useFocusEffect(
     React.useCallback(() => {
+      let isActive = true;
       getAllArticles();
+      return () => {
+        isActive = false;
+      };
     }, [savedArticles])
   );
 
@@ -30,7 +34,7 @@ const BookmarkScreen = () => {
       <FlatList
         data={savedArticles}
         renderItem={({ item }) => <Text>{item}</Text>}
-        keyExtractor={(index) => 'key' + index}
+        keyExtractor={(item, index) => 'key' + index}
         showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
