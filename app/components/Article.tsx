@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Image, Text, Share, Button } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
@@ -10,6 +10,7 @@ import colors from '../config/colors';
 import fontSize from '../config/fontSize';
 import { saveArticle, deleteArticle, getAllArticles } from '../helpers/bookmarkAtricle';
 import { useNonInitialEffect } from '../helpers/useNonInitalEffectHook';
+import { calcDateDifference } from '../helpers/calcDateDifference';
 
 export type ArticleProps = {
   image: Asset;
@@ -23,18 +24,7 @@ export type ArticleProps = {
 const Article = ({ ...data }: ArticleProps) => {
   const navigation = useNavigation();
 
-  const checkIfArticleIsBookmarked = (): boolean => {
-    let returnValue: boolean = false;
-    getAllArticles().then((response) => {
-      if (typeof response === 'string') {
-        const arryResponse: string[] = JSON.parse(response);
-        returnValue = arryResponse.includes(data.id);
-      }
-    });
-    return returnValue;
-  };
-
-  const [bookmark, setBookmark] = useState(checkIfArticleIsBookmarked);
+  const [bookmark, setBookmark] = useState(false);
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -45,6 +35,15 @@ const Article = ({ ...data }: ArticleProps) => {
       alert(error.message);
     }
   };
+
+  useEffect(() => {
+    getAllArticles().then((response) => {
+      if (response !== undefined) {
+        const arryResponse: string[] = JSON.parse(response);
+        setBookmark(arryResponse.includes(data.id));
+      }
+    });
+  }, []);
 
   useNonInitialEffect(() => {
     bookmark ? saveArticle(data.id) : deleteArticle(data.id);
@@ -74,7 +73,7 @@ const Article = ({ ...data }: ArticleProps) => {
           <View style={styles.header}>
             <Text style={styles.category}>{data.category}</Text>
             <Text style={styles.spacer}>{'\u2022'}</Text>
-            <Text style={styles.date}>{data.createdAt}</Text>
+            <Text style={styles.date}>{calcDateDifference(data.createdAt)}</Text>
           </View>
           <Text style={styles.headline}>{data.headline}</Text>
         </View>
