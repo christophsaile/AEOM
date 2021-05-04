@@ -1,51 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, Text } from 'react-native';
-import { EntryCollection } from 'contentful';
+import { SafeAreaView, Text, FlatList } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
-import { saveArticle, deleteArticle, getAllArticles } from '../helpers/bookmarkAtricle';
-import { IArticleFields } from '../types/generated/contentful';
-import { client } from '../config/contentfulClient';
 import colors from '../config/colors';
 
 const BookmarkScreen = () => {
-  const [contentfulData, setContentfulData] = useState<null | EntryCollection<IArticleFields>>(
-    null
+  const [savedArticles, setSavedArticles] = useState(null);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getAllArticles();
+    }, [savedArticles])
   );
 
-  const getContentfulData = () => {
-    client
-      .getEntries<IArticleFields>({
-        content_type: 'article',
-        'sys.id[all]': 'DrbIyNgKDfz1Neh0X0K2i, 42pA5JF1vBXjLmFDMUqgnE',
-      })
-      .then((response) => {
-        setContentfulData(response);
-        console.log(response);
-      })
-      .catch(console.error);
+  const getAllArticles = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@MyStore:bookmarks');
+      if (value !== null) {
+        setSavedArticles(JSON.parse(value));
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: colors.blue }}>
-      <Text>Hello {contentfulData}</Text>
-      {/* <FlatList
-        data={contentfulData?.items}
-        renderItem={({ item }) => (
-          <Article
-            image={item.fields.image}
-            category={item.fields.category}
-            headline={item.fields.headline}
-            createdAt={item.sys.createdAt}
-            text={item.fields.text}
-            id={item.sys.id}
-          />
-        )}
-        keyExtractor={(item) => item.sys.id}
-        ListHeaderComponent={mainHeadline}
+      <FlatList
+        data={savedArticles}
+        renderItem={({ item }) => <Text>{item}</Text>}
+        keyExtractor={(index) => 'key' + index}
         showsVerticalScrollIndicator={false}
-        refreshing={refreshing}
-        onRefresh={() => onRefresh()}
-      /> */}
+      />
     </SafeAreaView>
   );
 };
