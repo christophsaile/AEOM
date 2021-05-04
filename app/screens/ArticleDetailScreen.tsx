@@ -9,6 +9,7 @@ import colors from '../config/colors';
 import { StackScreenProps } from '@react-navigation/stack';
 import { StackParamList } from '../../App';
 import Headline from '../components/Headline';
+import { calcDateDifference } from '../helpers/calcDateDifference';
 
 type Props = StackScreenProps<StackParamList, 'ArticleDetailScreen'>;
 
@@ -35,7 +36,7 @@ const ArticleDetailScreen = ({ navigation, route }: Props) => {
           <View style={styles.header}>
             <Text style={styles.category}>{category}</Text>
             <Text style={styles.spacer}>{'\u2022'}</Text>
-            <Text style={styles.date}>{createdAt}</Text>
+            <Text style={styles.date}>{calcDateDifference(createdAt)}</Text>
           </View>
           <Headline title={headline} typeOfHeadline={'h2'} />
           {documentToReactComponents(text, contentfulRichTextToReactNative)}
