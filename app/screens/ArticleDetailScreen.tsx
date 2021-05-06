@@ -14,7 +14,7 @@ import { calcDateDifference } from '../helpers/calcDateDifference';
 type Props = StackScreenProps<StackParamList, 'ArticleDetailScreen'>;
 
 const ArticleDetailScreen = ({ navigation, route }: Props) => {
-  const { image, category, headline, text, createdAt, id } = route.params;
+  const { image, category, headline, text, createdAt, id, readingTime } = route.params;
 
   return (
     <SafeAreaView style={styles.articleDetail}>

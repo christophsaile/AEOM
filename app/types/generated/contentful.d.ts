@@ -15,6 +15,9 @@ export interface IArticleFields {
 
   /** Text */
   text: Document;
+
+  /** Reading Time */
+  readingTime?: number | undefined;
 }
 
 export interface IArticle extends Entry<IArticleFields> {

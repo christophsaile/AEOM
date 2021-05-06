@@ -54,6 +54,7 @@ const ArticleOverviewScreen = () => {
             headline={item.fields.headline}
             createdAt={item.sys.createdAt}
             text={item.fields.text}
+            readingTime={item.fields.readingTime}
             id={item.sys.id}
           />
         )}

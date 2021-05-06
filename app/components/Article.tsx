@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Image, Text, Share, Button } from 'react-native';
-import { TouchableHighlight } from 'react-native-gesture-handler';
+import { StyleSheet, View, Image, Text, Share, Button, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Asset } from 'contentful';
 import { Document } from '@contentful/rich-text-types';
@@ -18,6 +17,7 @@ export type ArticleProps = {
   headline: string;
   createdAt: string;
   text: Document;
+  readingTime?: number;
   id: string;
 };
 
@@ -79,7 +79,22 @@ const Article = ({ ...data }: ArticleProps) => {
         </View>
       </TouchableHighlight>
       <View style={styles.footer}>
-        <Text style={styles.footerText}>Read more</Text>
+        <TouchableHighlight
+          style={styles.footerTextContainer}
+          underlayColor={colors.white}
+          activeOpacity={0.9}
+          onPress={() => navigation.navigate('ArticleDetailScreen', data)}
+        >
+          <>
+            <Text style={styles.footerText}>Read more</Text>
+            {data.readingTime && (
+              <>
+                <Text style={styles.spacer}>{'\u2022'}</Text>
+                <Text style={styles.footerText}>{data.readingTime + ' min'}</Text>
+              </>
+            )}
+          </>
+        </TouchableHighlight>
         <View style={styles.footerIcons}>
           <MaterialCommunityIcons
             style={{ paddingRight: 30 }}
@@ -140,9 +155,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
+  footerTextContainer: {
+    flexDirection: 'row',
+  },
   footerText: {
     color: colors.grey,
-    textTransform: 'uppercase',
   },
   footerIcons: {
     display: 'flex',
