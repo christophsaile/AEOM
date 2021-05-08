@@ -52,7 +52,7 @@ const ArticleOverviewScreen = () => {
             image={item.fields.image}
             category={item.fields.category}
             headline={item.fields.headline}
-            createdAt={item.sys.createdAt}
+            updatedAt={item.sys.updatedAt}
             text={item.fields.text}
             readingTime={item.fields.readingTime}
             id={item.sys.id}

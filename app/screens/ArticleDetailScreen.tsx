@@ -14,7 +14,7 @@ import { calcDateDifference } from '../helpers/calcDateDifference';
 type Props = StackScreenProps<StackParamList, 'ArticleDetailScreen'>;
 
 const ArticleDetailScreen = ({ navigation, route }: Props) => {
-  const { image, category, headline, text, createdAt, id, readingTime } = route.params;
+  const { image, category, headline, text, updatedAt, id, readingTime } = route.params;
 
   return (
     <SafeAreaView style={styles.articleDetail}>
@@ -36,7 +36,7 @@ const ArticleDetailScreen = ({ navigation, route }: Props) => {
           <View style={styles.header}>
             <Text style={styles.category}>{category}</Text>
             <Text style={styles.spacer}>{'\u2022'}</Text>
-            <Text style={styles.date}>{calcDateDifference(createdAt)}</Text>
+            <Text style={styles.date}>{calcDateDifference(updatedAt)}</Text>
           </View>
           <Headline title={headline} typeOfHeadline={'h2'} />
           {documentToReactComponents(text, contentfulRichTextToReactNative)}

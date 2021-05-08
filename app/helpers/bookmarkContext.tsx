@@ -21,7 +21,6 @@ const BookmarkProvider: FC = ({ children }) => {
   );
 
   useEffect(() => {
-    console.log('triggert');
     async function getStoredArticles() {
       try {
         const value = await AsyncStorage.getItem('@MyStore:bookmarks');

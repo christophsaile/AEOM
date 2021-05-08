@@ -14,7 +14,7 @@ export type ArticleProps = {
   image: Asset;
   category: string;
   headline: string;
-  createdAt: string;
+  updatedAt: string;
   text: Document;
   readingTime?: number;
   id: string;
@@ -59,7 +59,7 @@ const Article = ({ ...data }: ArticleProps) => {
           <View style={styles.header}>
             <Text style={styles.category}>{data.category}</Text>
             <Text style={styles.spacer}>{'\u2022'}</Text>
-            <Text style={styles.date}>{calcDateDifference(data.createdAt)}</Text>
+            <Text style={styles.date}>{calcDateDifference(data.updatedAt)}</Text>
           </View>
           <Text style={styles.headline}>{data.headline}</Text>
         </View>
