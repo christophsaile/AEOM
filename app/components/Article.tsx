@@ -8,29 +8,31 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../config/colors';
 import fontSize from '../config/fontSize';
 import { calcDateDifference } from '../helpers/calcDateDifference';
-import { BookmarkContext } from '../helpers/bookmarkContext';
+import { GlobalStateContext } from '../globalStateContext';
+import { IAuthor } from '../types/generated/contentful';
 
 export type ArticleProps = {
+  id: string;
   image: Asset;
   category: string;
   headline: string;
   updatedAt: string;
   text: Document;
   readingTime?: number;
-  id: string;
+  author: IAuthor;
 };
 
-const Article = ({ ...data }: ArticleProps) => {
+const Article = ({ ...props }: ArticleProps) => {
   const navigation = useNavigation();
   const { bookmarkedArticles, addBookmarkedArticle, deleteBookmarkedArticle } = useContext(
-    BookmarkContext
+    GlobalStateContext
   );
 
   const onShare = async () => {
     try {
       const result = await Share.share({
-        message: data.headline,
-        title: data.headline,
+        message: props.headline,
+        title: props.headline,
       });
     } catch (error) {
       alert(error.message);
@@ -38,9 +40,9 @@ const Article = ({ ...data }: ArticleProps) => {
   };
 
   const handleBookmark = () => {
-    bookmarkedArticles.includes(data.id)
-      ? deleteBookmarkedArticle(data.id)
-      : addBookmarkedArticle(data.id);
+    bookmarkedArticles.includes(props.id)
+      ? deleteBookmarkedArticle(props.id)
+      : addBookmarkedArticle(props.id);
   };
 
   return (
@@ -48,20 +50,20 @@ const Article = ({ ...data }: ArticleProps) => {
       <TouchableHighlight
         underlayColor={colors.white}
         activeOpacity={0.9}
-        onPress={() => navigation.navigate('ArticleDetailScreen', data)}
+        onPress={() => navigation.navigate('ArticleDetailScreen', props)}
       >
         <View>
           <Image
             resizeMode='contain'
             style={styles.img}
-            source={{ uri: 'https:' + data.image.fields.file.url }}
+            source={{ uri: 'https:' + props.image.fields.file.url }}
           />
           <View style={styles.header}>
-            <Text style={styles.category}>{data.category}</Text>
+            <Text style={styles.category}>{props.category}</Text>
             <Text style={styles.spacer}>{'\u2022'}</Text>
-            <Text style={styles.date}>{calcDateDifference(data.updatedAt)}</Text>
+            <Text style={styles.date}>{calcDateDifference(props.updatedAt)}</Text>
           </View>
-          <Text style={styles.headline}>{data.headline}</Text>
+          <Text style={styles.headline}>{props.headline}</Text>
         </View>
       </TouchableHighlight>
       <View style={styles.footer}>
@@ -69,14 +71,14 @@ const Article = ({ ...data }: ArticleProps) => {
           style={styles.footerTextContainer}
           underlayColor={colors.white}
           activeOpacity={0.9}
-          onPress={() => navigation.navigate('ArticleDetailScreen', data)}
+          onPress={() => navigation.navigate('ArticleDetailScreen', props)}
         >
           <>
             <Text style={styles.footerText}>Read more</Text>
-            {data.readingTime && (
+            {props.readingTime && (
               <>
                 <Text style={styles.spacer}>{'\u2022'}</Text>
-                <Text style={styles.footerText}>{data.readingTime + ' min'}</Text>
+                <Text style={styles.footerText}>{props.readingTime + ' min'}</Text>
               </>
             )}
           </>
@@ -92,7 +94,7 @@ const Article = ({ ...data }: ArticleProps) => {
           <MaterialCommunityIcons
             name='bookmark-minus-outline'
             size={24}
-            color={bookmarkedArticles.includes(data.id) ? colors.blue : colors.grey}
+            color={bookmarkedArticles.includes(props.id) ? colors.blue : colors.grey}
             onPress={() => handleBookmark()}
           />
         </View>
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
   article: {
     display: 'flex',
     flex: 1,
-    marginTop: 30,
+    marginBottom: 40,
     paddingBottom: 20,
     borderBottomWidth: 1,
     borderBottomColor: colors.lightgrey,

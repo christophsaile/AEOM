@@ -3,8 +3,8 @@ import 'react-native-gesture-handler';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import ArticleOverviewScreen from '../screens/ArticleOverviewScreen';
-import BookmarkScreen from '../screens/BookmarkScreen';
+import ExploreScreen from '../screens/ExploreScreen';
+import BookmarkScreen from '../screens/bookmarkScreen';
 import colors from '../config/colors';
 
 const Tab = createBottomTabNavigator();
@@ -21,8 +21,8 @@ const BottomNavigator = () => {
       }}
     >
       <Tab.Screen
-        name='ArticleOverviewScreen'
-        component={ArticleOverviewScreen}
+        name='ExploreScreen'
+        component={ExploreScreen}
         options={{
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name='home-minus-outline' size={24} color={color} />

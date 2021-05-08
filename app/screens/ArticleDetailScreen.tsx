@@ -8,7 +8,7 @@ import { contentfulRichTextToReactNative } from '../helpers/contentfulRichTextTo
 import colors from '../config/colors';
 import { StackScreenProps } from '@react-navigation/stack';
 import { StackParamList } from '../../App';
-import Headline from '../components/Headline';
+import Headline from '../components/headline';
 import { calcDateDifference } from '../helpers/calcDateDifference';
 
 type Props = StackScreenProps<StackParamList, 'ArticleDetailScreen'>;

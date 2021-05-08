@@ -1,17 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, FlatList } from 'react-native';
-import { EntryCollection } from 'contentful';
+import React, { useState, useContext } from 'react';
+import { SafeAreaView, StyleSheet, View, FlatList } from 'react-native';
 
 import { IArticleFields } from '../types/generated/contentful';
 import { client } from '../config/contentfulClient';
 import colors from '../config/colors';
-import Article from '../components/Article';
-import Headline from '../components/Headline';
+import Article from '../components/article';
+import { GlobalStateContext } from '../globalStateContext';
+import Header from '../components/header';
 
-const ArticleOverviewScreen = () => {
-  const [contentfulData, setContentfulData] = useState<null | EntryCollection<IArticleFields>>(
-    null
-  );
+const ExploreScreen = () => {
+  const { articles, setArticles } = useContext(GlobalStateContext);
   const [refreshing, setRefreshing] = useState(false);
 
   const getContentfulData = () => {
@@ -20,8 +18,7 @@ const ArticleOverviewScreen = () => {
         content_type: 'article',
       })
       .then((response) => {
-        setContentfulData(response);
-        setRefreshing(false);
+        setArticles(response);
       })
       .catch(console.error);
   };
@@ -29,37 +26,28 @@ const ArticleOverviewScreen = () => {
   const onRefresh = () => {
     setRefreshing(true);
     getContentfulData();
+    setRefreshing(false);
   };
-
-  const mainHeadline = () => {
-    return (
-      <Text style={{ textAlign: 'center' }}>
-        <Headline color={colors.blue} typeOfHeadline={'h1'} title={'AEOM'} />
-      </Text>
-    );
-  };
-
-  useEffect(() => {
-    getContentfulData();
-  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={contentfulData?.items}
+        style={styles.list}
+        data={articles?.items}
         renderItem={({ item }) => (
           <Article
+            id={item.sys.id}
             image={item.fields.image}
             category={item.fields.category}
             headline={item.fields.headline}
             updatedAt={item.sys.updatedAt}
             text={item.fields.text}
             readingTime={item.fields.readingTime}
-            id={item.sys.id}
+            author={item.fields.author}
           />
         )}
         keyExtractor={(item) => item.sys.id}
-        ListHeaderComponent={mainHeadline}
+        ListHeaderComponent={() => <Header theme='explore' title='Explore' />}
         showsVerticalScrollIndicator={false}
         refreshing={refreshing}
         onRefresh={() => onRefresh()}
@@ -71,8 +59,12 @@ const ArticleOverviewScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: colors.white,
   },
+  list: {
+    padding: 20,
+    paddingTop: 40,
+  },
 });
-export default ArticleOverviewScreen;
+
+export default ExploreScreen;
