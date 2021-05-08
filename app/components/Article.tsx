@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Image, Text, Share, Button, TouchableHighlight } from 'react-native';
+import React, { useContext } from 'react';
+import { StyleSheet, View, Image, Text, Share, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Asset } from 'contentful';
 import { Document } from '@contentful/rich-text-types';
@@ -7,9 +7,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import colors from '../config/colors';
 import fontSize from '../config/fontSize';
-import { saveArticle, deleteArticle, getAllArticles } from '../helpers/bookmarkAtricle';
-import { useNonInitialEffect } from '../helpers/useNonInitalEffectHook';
 import { calcDateDifference } from '../helpers/calcDateDifference';
+import { BookmarkContext } from '../helpers/bookmarkContext';
 
 export type ArticleProps = {
   image: Asset;
@@ -23,8 +22,10 @@ export type ArticleProps = {
 
 const Article = ({ ...data }: ArticleProps) => {
   const navigation = useNavigation();
+  const { bookmarkedArticles, addBookmarkedArticle, deleteBookmarkedArticle } = useContext(
+    BookmarkContext
+  );
 
-  const [bookmark, setBookmark] = useState(false);
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -36,29 +37,14 @@ const Article = ({ ...data }: ArticleProps) => {
     }
   };
 
-  useEffect(() => {
-    getAllArticles().then((response) => {
-      if (response !== undefined) {
-        const arryResponse: string[] = JSON.parse(response);
-        setBookmark(arryResponse.includes(data.id));
-      }
-    });
-  }, []);
-
-  useNonInitialEffect(() => {
-    bookmark ? saveArticle(data.id) : deleteArticle(data.id);
-  }, [bookmark]);
+  const handleBookmark = () => {
+    bookmarkedArticles.includes(data.id)
+      ? deleteBookmarkedArticle(data.id)
+      : addBookmarkedArticle(data.id);
+  };
 
   return (
     <View style={styles.article}>
-      <Button
-        title='show storage'
-        onPress={() => {
-          getAllArticles().then((token) => {
-            console.log(token);
-          });
-        }}
-      />
       <TouchableHighlight
         underlayColor={colors.white}
         activeOpacity={0.9}
@@ -106,8 +92,8 @@ const Article = ({ ...data }: ArticleProps) => {
           <MaterialCommunityIcons
             name='bookmark-minus-outline'
             size={24}
-            color={bookmark ? colors.blue : colors.grey}
-            onPress={() => setBookmark(!bookmark)}
+            color={bookmarkedArticles.includes(data.id) ? colors.blue : colors.grey}
+            onPress={() => handleBookmark()}
           />
         </View>
       </View>

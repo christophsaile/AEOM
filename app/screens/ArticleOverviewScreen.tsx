@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, View, Text, FlatList } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, FlatList } from 'react-native';
 import { EntryCollection } from 'contentful';
 
 import { IArticleFields } from '../types/generated/contentful';
