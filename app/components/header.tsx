@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import colors from '../config/colors';
 
-import Headline from '../components/Headline';
+import Headline from './headline';
 
 type Theme = 'explore' | 'bookmark';
 

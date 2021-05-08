@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 
 import fontSize from '../config/fontSize';
-import Headline from '../components/Headline';
+import Headline from '../components/headline';
 
 export const contentfulRichTextToReactNative = {
   renderMark: {
