@@ -18,6 +18,9 @@ export interface IArticleFields {
 
   /** Reading Time */
   readingTime?: number | undefined;
+
+  /** Author */
+  author: IAuthor;
 }
 
 export interface IArticle extends Entry<IArticleFields> {
@@ -45,7 +48,7 @@ export interface IAuthorFields {
   about?: string | undefined;
 
   /** Portrait */
-  portrait?: Asset | undefined;
+  portrait: Asset;
 }
 
 export interface IAuthor extends Entry<IAuthorFields> {
