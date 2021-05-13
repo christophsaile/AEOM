@@ -112,11 +112,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.lightgrey,
   },
-  img: { flex: 1, aspectRatio: 1 },
+  img: { flex: 1, aspectRatio: 1, borderRadius: 3 },
   header: {
     display: 'flex',
     flexDirection: 'row',
     marginTop: 10,
+    marginBottom: 10,
   },
   category: {
     color: colors.blue,
@@ -131,7 +132,6 @@ const styles = StyleSheet.create({
     color: colors.grey,
   },
   headline: {
-    marginTop: 10,
     fontSize: fontSize.h2,
     fontWeight: 'bold',
   },

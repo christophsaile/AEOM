@@ -15,12 +15,8 @@ type Props = {
 const Header = (props: Props) => {
   return (
     <View style={styles.container}>
-      <Headline
-        color={props.theme === 'explore' ? colors.blue : colors.white}
-        typeOfHeadline={'h2'}
-        title={props.title}
-      />
-      <MaterialCommunityIcons name='sort' size={32} color={colors.black} />
+      <Headline color={colors.blue} typeOfHeadline={'h2'} title={props.title} />
+      <MaterialCommunityIcons name='sort' size={32} color={colors.blue} />
     </View>
   );
 };

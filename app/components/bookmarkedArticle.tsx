@@ -1,11 +1,12 @@
 import React from 'react';
 import { Text, View, Image, StyleSheet, TouchableHighlight } from 'react-native';
-import { useLinkProps, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import { ArticleProps } from '../components/Article';
 import colors from '../config/colors';
 import { calcDateDifference } from '../helpers/calcDateDifference';
 import fontSize from '../config/fontSize';
+import Author from './author';
 
 const BookmarkedArticle = ({ ...props }: ArticleProps) => {
   const navigation = useNavigation();
@@ -13,18 +14,13 @@ const BookmarkedArticle = ({ ...props }: ArticleProps) => {
   return (
     <TouchableHighlight
       style={styles.article}
-      underlayColor={colors.black}
+      underlayColor={colors.white}
       activeOpacity={0.9}
       onPress={() => navigation.navigate('ArticleDetailScreen', props)}
     >
       <View>
-        <View style={styles.author}>
-          <Image
-            resizeMode='cover'
-            style={styles.authorImg}
-            source={{ uri: 'https:' + props.author.fields.portrait.fields.file.url }}
-          />
-          <Text style={styles.authorName}>{props.author.fields.name}</Text>
+        <View style={{ marginBottom: 10 }}>
+          <Author data={props.author} />
         </View>
         <View style={styles.main}>
           <Text numberOfLines={3} style={styles.title}>
@@ -54,24 +50,10 @@ const BookmarkedArticle = ({ ...props }: ArticleProps) => {
 };
 const styles = StyleSheet.create({
   article: {
-    marginBottom: 10,
+    marginBottom: 15,
     padding: 10,
     borderRadius: 10,
-    backgroundColor: colors.black,
-  },
-  author: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  authorImg: {
-    width: 24,
-    aspectRatio: 1,
-    marginRight: 10,
-    borderRadius: 99,
-  },
-  authorName: {
-    color: colors.grey,
+    backgroundColor: colors.lightgrey,
   },
   main: {
     flex: 1,
