@@ -5,4 +5,5 @@ export default {
   h4: 24,
   text: 18,
   quote: 10,
+  modal: 20,
 };
