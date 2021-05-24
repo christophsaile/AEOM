@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import colors from './app/config/colors';
-import ExploreScreen from './app/screens/ExploreScreen';
+import ExploreScreen from './app/screens/exploreScreen';
 import ArticleDetailScreen from './app/screens/articleDetailScreen';
 import BottomNavigator from './app/components/bottomNavigation';
 import { ArticleProps } from './app/components/article';

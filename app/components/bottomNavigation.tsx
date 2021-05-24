@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import ExploreScreen from '../screens/ExploreScreen';
+import ExploreScreen from '../screens/exploreScreen';
 import BookmarkScreen from '../screens/bookmarkScreen';
 import colors from '../config/colors';
 

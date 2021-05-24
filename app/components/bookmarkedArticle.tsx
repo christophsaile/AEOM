@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, Image, StyleSheet, TouchableHighlight } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { ArticleProps } from '../components/Article';
+import { ArticleProps } from './article';
 import colors from '../config/colors';
 import { calcDateDifference } from '../helpers/calcDateDifference';
 import fontSize from '../config/fontSize';
