@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, Modal } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import colors from '../config/colors';
 import fontSize from '../config/fontSize';
+import { GlobalStateContext } from '../globalStateContext';
 
 const Sort = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [active, setActive] = useState(0);
+  const { articles, setArticles } = useContext(GlobalStateContext);
 
   const data = [
     { index: 0, text: 'latest articles', action: 'latestA' },
@@ -16,7 +18,23 @@ const Sort = () => {
   ];
 
   const sortData = (action: string) => {
-    console.log(action);
+    if (articles?.items) {
+      switch (action) {
+        case 'latestA':
+          break;
+        case 'oldestA':
+          const sortData = articles.items.sort((a, b) => {
+            const dateA = new Date(a.sys.updatedAt).valueOf();
+            const dateB = new Date(b.sys.updatedAt).valueOf();
+            return dateA - dateB;
+          });
+          break;
+        case 'shortestRT':
+          break;
+      }
+    } else {
+      console.log('no items found to filter');
+    }
   };
 
   return (
@@ -38,7 +56,7 @@ const Sort = () => {
         <TouchableOpacity
           activeOpacity={1}
           onPressOut={() => {
-            sortData('hello world');
+            sortData(data[active].action);
             setModalVisible(!modalVisible);
           }}
           style={styles.modal}
