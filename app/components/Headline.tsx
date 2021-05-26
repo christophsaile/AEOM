@@ -10,6 +10,7 @@ type Props = {
   title: string;
   typeOfHeadline: typeOfHeadline;
   color?: string;
+  noMargin?: true;
 };
 
 const Headline = (props: Props) => {
@@ -17,7 +18,11 @@ const Headline = (props: Props) => {
     <Text
       style={[
         styles[props.typeOfHeadline],
-        { fontWeight: 'bold', color: props.color || colors.black },
+        {
+          fontWeight: 'bold',
+          color: props.color || colors.black,
+          marginBottom: props.noMargin && 0,
+        },
       ]}
     >
       {props.title}

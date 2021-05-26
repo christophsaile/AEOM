@@ -15,24 +15,23 @@ type Props = {
 
 const Header = (props: Props) => {
   return (
-    <>
-      <View style={styles.container}>
-        <Headline color={colors.blue} typeOfHeadline={'h2'} title={props.title} />
-        <Sort />
-      </View>
-      <Filter />
-    </>
+    <View style={styles.header}>
+      <Headline color={colors.blue} typeOfHeadline={'h2'} noMargin={true} title={props.title} />
+      <Sort />
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'baseline',
+    marginBottom: 15,
+    marginHorizontal: 20,
+    paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: colors.lightgrey,
-    marginBottom: 40,
   },
 });
 

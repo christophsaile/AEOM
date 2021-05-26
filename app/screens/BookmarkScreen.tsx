@@ -7,16 +7,20 @@ import BookmarkedArticle from '../components/bookmarkedArticle';
 import Header from '../components/header';
 
 const BookmarkScreen = () => {
-  const { articles, bookmarkedArticles } = useContext(GlobalStateContext);
+  const { unfilteredArticles, bookmarkedArticles } = useContext(GlobalStateContext);
 
-  let bookmarkedArticlesData = articles?.items.filter((item) =>
+  let bookmarkedArticlesData = unfilteredArticles?.items.filter((item) =>
     bookmarkedArticles.includes(item.sys.id)
   );
+
+  const renderHeader = () => {
+    return <Header theme='bookmark' title='Reading list' />;
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        style={styles.list}
+        contentContainerStyle={styles.list}
         data={bookmarkedArticlesData}
         renderItem={({ item }) => (
           <BookmarkedArticle
@@ -32,7 +36,7 @@ const BookmarkScreen = () => {
         )}
         keyExtractor={(item, index) => 'key' + index}
         showsVerticalScrollIndicator={false}
-        ListHeaderComponent={<Header theme='bookmark' title='Reading list' />}
+        ListHeaderComponent={renderHeader()}
       />
     </SafeAreaView>
   );
@@ -44,7 +48,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   list: {
-    padding: 20,
     paddingTop: 40,
   },
 });

@@ -51,6 +51,7 @@ const BookmarkedArticle = ({ ...props }: ArticleProps) => {
 const styles = StyleSheet.create({
   article: {
     marginBottom: 15,
+    marginHorizontal: 20,
     padding: 10,
     borderRadius: 10,
     backgroundColor: colors.lightgrey,

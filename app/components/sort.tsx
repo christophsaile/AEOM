@@ -9,21 +9,21 @@ import { GlobalStateContext } from '../globalStateContext';
 const Sort = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [active, setActive] = useState(0);
-  const { articles, setArticles } = useContext(GlobalStateContext);
+  const { unfilteredArticles, setUnfilteredArticles } = useContext(GlobalStateContext);
 
   const data = [
-    { index: 0, text: 'latest articles', action: 'latestA' },
-    { index: 1, text: 'oldest articles', action: 'oldestA' },
+    { index: 0, text: 'latest unfilteredArticles', action: 'latestA' },
+    { index: 1, text: 'oldest unfilteredArticles', action: 'oldestA' },
     { index: 2, text: 'shortest reading time', action: 'shortestRT' },
   ];
 
   const sortData = (action: string) => {
-    if (articles?.items) {
+    if (unfilteredArticles?.items) {
       switch (action) {
         case 'latestA':
           break;
         case 'oldestA':
-          const sortData = articles.items.sort((a, b) => {
+          const sortData = unfilteredArticles.items.sort((a, b) => {
             const dateA = new Date(a.sys.updatedAt).valueOf();
             const dateB = new Date(b.sys.updatedAt).valueOf();
             return dateA - dateB;

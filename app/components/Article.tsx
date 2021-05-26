@@ -106,13 +106,13 @@ const Article = ({ ...props }: ArticleProps) => {
 const styles = StyleSheet.create({
   article: {
     display: 'flex',
-    flex: 1,
+    marginHorizontal: 20,
     marginBottom: 40,
     paddingBottom: 20,
     borderBottomWidth: 1,
     borderBottomColor: colors.lightgrey,
   },
-  img: { flex: 1, aspectRatio: 1, borderRadius: 3 },
+  img: { aspectRatio: 1, borderRadius: 3 },
   header: {
     display: 'flex',
     flexDirection: 'row',

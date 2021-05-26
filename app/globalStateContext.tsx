@@ -6,16 +6,20 @@ import { IArticleFields } from './types/generated/contentful';
 import { client } from './config/contentfulClient';
 
 type Context = {
-  articles: EntryCollection<IArticleFields> | null;
-  setArticles: (articles: EntryCollection<IArticleFields> | null) => void;
+  unfilteredArticles: EntryCollection<IArticleFields> | null;
+  filteredArticles: EntryCollection<IArticleFields> | null;
+  setUnfilteredArticles: (unfilteredArticles: EntryCollection<IArticleFields> | null) => void;
+  setFilteredArticles: (unfilteredArticles: EntryCollection<IArticleFields> | null) => void;
   bookmarkedArticles: string[];
   addBookmarkedArticle: (id: string) => void;
   deleteBookmarkedArticle: (id: string) => void;
 };
 
 const contextDefaultValues: Context = {
-  articles: null,
-  setArticles: () => {},
+  unfilteredArticles: null,
+  filteredArticles: null,
+  setUnfilteredArticles: () => {},
+  setFilteredArticles: () => {},
   bookmarkedArticles: [],
   addBookmarkedArticle: () => {},
   deleteBookmarkedArticle: () => {},
@@ -24,7 +28,13 @@ const contextDefaultValues: Context = {
 export const GlobalStateContext = createContext<Context>(contextDefaultValues);
 
 const GlobalStateProvider: FC = ({ children }) => {
-  const [articles, setArticles] = useState<EntryCollection<IArticleFields> | null>(null);
+  const [
+    unfilteredArticles,
+    setUnfilteredArticles,
+  ] = useState<EntryCollection<IArticleFields> | null>(null);
+  const [filteredArticles, setFilteredArticles] = useState<EntryCollection<IArticleFields> | null>(
+    null
+  );
   const [bookmarkedArticles, setBookmarkedArticles] = useState<string[]>(
     contextDefaultValues.bookmarkedArticles
   );
@@ -35,7 +45,8 @@ const GlobalStateProvider: FC = ({ children }) => {
         content_type: 'article',
       })
       .then((response) => {
-        setArticles(response);
+        setUnfilteredArticles(response);
+        setFilteredArticles(response);
       })
       .catch(console.error);
   }, []);
@@ -79,8 +90,10 @@ const GlobalStateProvider: FC = ({ children }) => {
   return (
     <GlobalStateContext.Provider
       value={{
-        articles,
-        setArticles,
+        unfilteredArticles,
+        filteredArticles,
+        setUnfilteredArticles,
+        setFilteredArticles,
         bookmarkedArticles,
         addBookmarkedArticle,
         deleteBookmarkedArticle,

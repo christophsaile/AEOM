@@ -7,9 +7,12 @@ import colors from '../config/colors';
 import Article from '../components/article';
 import { GlobalStateContext } from '../globalStateContext';
 import Header from '../components/header';
+import Filter from '../components/filter';
 
 const ExploreScreen = () => {
-  const { articles, setArticles } = useContext(GlobalStateContext);
+  const { filteredArticles, setFilteredArticles, setUnfilteredArticles } = useContext(
+    GlobalStateContext
+  );
   const [refreshing, setRefreshing] = useState(false);
 
   const getContentfulData = () => {
@@ -18,7 +21,7 @@ const ExploreScreen = () => {
         content_type: 'article',
       })
       .then((response) => {
-        setArticles(response);
+        setUnfilteredArticles(response);
       })
       .catch(console.error);
   };
@@ -29,11 +32,20 @@ const ExploreScreen = () => {
     setRefreshing(false);
   };
 
+  const renderHeader = () => {
+    return (
+      <>
+        <Header theme='explore' title='Explore' />
+        <Filter />
+      </>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        style={styles.list}
-        data={articles?.items}
+        contentContainerStyle={styles.list}
+        data={filteredArticles?.items}
         renderItem={({ item }) => (
           <Article
             id={item.sys.id}
@@ -47,7 +59,7 @@ const ExploreScreen = () => {
           />
         )}
         keyExtractor={(item) => item.sys.id}
-        ListHeaderComponent={() => <Header theme='explore' title='Explore' />}
+        ListHeaderComponent={renderHeader()}
         showsVerticalScrollIndicator={false}
         refreshing={refreshing}
         onRefresh={() => onRefresh()}
@@ -62,7 +74,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   list: {
-    padding: 20,
     paddingTop: 40,
   },
 });
