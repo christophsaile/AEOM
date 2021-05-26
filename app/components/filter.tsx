@@ -71,8 +71,6 @@ const Filter = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginLeft: 20,
-    marginBottom: 20,
   },
   filter: {
     marginRight: 10,

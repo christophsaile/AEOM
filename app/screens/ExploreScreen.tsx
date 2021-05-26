@@ -7,7 +7,6 @@ import colors from '../config/colors';
 import Article from '../components/article';
 import { GlobalStateContext } from '../globalStateContext';
 import Header from '../components/header';
-import Filter from '../components/filter';
 
 const ExploreScreen = () => {
   const { filteredArticles, setFilteredArticles, setUnfilteredArticles } = useContext(
@@ -33,12 +32,7 @@ const ExploreScreen = () => {
   };
 
   const renderHeader = () => {
-    return (
-      <>
-        <Header theme='explore' title='Explore' />
-        <Filter />
-      </>
-    );
+    return <Header theme='explore' title='Explore' hasFilter={true} />;
   };
 
   return (
