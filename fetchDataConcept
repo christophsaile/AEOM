@@ -1,0 +1,25 @@
+Filter:
+-> click filter
+-> check selected SortOptionn (global state)
+-> check ActiveFilter (global state)
+-> fetch data from Contentful
+-> store data in global articles state
+
+Sort:
+-> check selected SortOptionn (global state)
+-> IF hasFilter
+    check ActiveFilter 
+    fetch data from Contentful
+    set data in global articles state
+-> ELSE 
+    fetch data from Contentful
+    set data in global bookmarkedArticles state
+
+Bookmarked:
+-> get bookmarkedArticles from local storage 
+-> fetch data from Contentful
+-> set data in global bookmarkedArticlesData state
+
+Articles:
+-> fetch data from Contentful
+-> store data in global articles state
