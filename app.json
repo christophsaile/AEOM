@@ -24,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.christophsaile.AEOM"
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
