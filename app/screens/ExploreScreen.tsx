@@ -9,25 +9,33 @@ import { GlobalStateContext } from '../globalStateContext';
 import Header from '../components/header';
 
 const ExploreScreen = () => {
-  const { filteredArticles, setFilteredArticles, setUnfilteredArticles } = useContext(
+  const { filteredArticles, setFilteredArticles, activeFilter, activeSort } = useContext(
     GlobalStateContext
   );
   const [refreshing, setRefreshing] = useState(false);
 
-  const getContentfulData = () => {
-    client
-      .getEntries<IArticleFields>({
-        content_type: 'article',
-      })
-      .then((response) => {
-        setUnfilteredArticles(response);
-      })
-      .catch(console.error);
-  };
-
   const onRefresh = () => {
     setRefreshing(true);
-    getContentfulData();
+    activeFilter === null
+      ? client
+          .getEntries<IArticleFields>({
+            content_type: 'article',
+            order: activeSort,
+          })
+          .then((response) => {
+            setFilteredArticles(response);
+          })
+          .catch(console.error)
+      : client
+          .getEntries<IArticleFields>({
+            content_type: 'article',
+            'fields.category': activeFilter,
+            order: activeSort,
+          })
+          .then((response) => {
+            setFilteredArticles(response);
+          })
+          .catch(console.error);
     setRefreshing(false);
   };
 

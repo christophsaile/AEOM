@@ -10,7 +10,7 @@ type Props = {
   title: string;
   typeOfHeadline: typeOfHeadline;
   color?: string;
-  noMargin?: true;
+  noMargin?: boolean;
 };
 
 const Headline = (props: Props) => {
@@ -21,7 +21,6 @@ const Headline = (props: Props) => {
         {
           fontWeight: 'bold',
           color: props.color || colors.black,
-          marginBottom: props.noMargin && 0,
         },
       ]}
     >

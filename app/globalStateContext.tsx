@@ -8,21 +8,29 @@ import { client } from './config/contentfulClient';
 type Context = {
   unfilteredArticles: EntryCollection<IArticleFields> | null;
   filteredArticles: EntryCollection<IArticleFields> | null;
+  bookmarkedArticles: string[];
+  activeSort: string;
+  activeFilter: string | null;
   setUnfilteredArticles: (unfilteredArticles: EntryCollection<IArticleFields> | null) => void;
   setFilteredArticles: (unfilteredArticles: EntryCollection<IArticleFields> | null) => void;
-  bookmarkedArticles: string[];
   addBookmarkedArticle: (id: string) => void;
   deleteBookmarkedArticle: (id: string) => void;
+  setActiveSort: (sortOption: string) => void;
+  setActiveFilter: (category: string | null) => void;
 };
 
 const contextDefaultValues: Context = {
   unfilteredArticles: null,
   filteredArticles: null,
+  bookmarkedArticles: [],
+  activeSort: '',
+  activeFilter: null,
   setUnfilteredArticles: () => {},
   setFilteredArticles: () => {},
-  bookmarkedArticles: [],
   addBookmarkedArticle: () => {},
   deleteBookmarkedArticle: () => {},
+  setActiveFilter: () => {},
+  setActiveSort: () => {},
 };
 
 export const GlobalStateContext = createContext<Context>(contextDefaultValues);
@@ -38,11 +46,14 @@ const GlobalStateProvider: FC = ({ children }) => {
   const [bookmarkedArticles, setBookmarkedArticles] = useState<string[]>(
     contextDefaultValues.bookmarkedArticles
   );
+  const [activeSort, setActiveSort] = useState<string>('-sys.updatedAt');
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   useEffect(() => {
     client
       .getEntries<IArticleFields>({
         content_type: 'article',
+        order: activeSort,
       })
       .then((response) => {
         setUnfilteredArticles(response);
@@ -73,15 +84,15 @@ const GlobalStateProvider: FC = ({ children }) => {
     }
   };
 
-  const addBookmarkedArticle = (IDnewArticle: string) => {
-    const value: string[] = bookmarkedArticles.concat(IDnewArticle);
+  const addBookmarkedArticle = (IdNewArticle: string) => {
+    const value: string[] = bookmarkedArticles.concat(IdNewArticle);
     setBookmarkedArticles(value);
     updateBookmarkStore(value);
   };
 
-  const deleteBookmarkedArticle = (IDdeleteArticle: string) => {
+  const deleteBookmarkedArticle = (IdDeleteArticle: string) => {
     const value: string[] = bookmarkedArticles.filter(
-      (IDarticle: string) => IDarticle !== IDdeleteArticle
+      (IdArticle: string) => IdArticle !== IdDeleteArticle
     );
     setBookmarkedArticles(value);
     updateBookmarkStore(value);
@@ -92,11 +103,15 @@ const GlobalStateProvider: FC = ({ children }) => {
       value={{
         unfilteredArticles,
         filteredArticles,
+        bookmarkedArticles,
+        activeSort,
+        activeFilter,
         setUnfilteredArticles,
         setFilteredArticles,
-        bookmarkedArticles,
         addBookmarkedArticle,
         deleteBookmarkedArticle,
+        setActiveSort,
+        setActiveFilter,
       }}
     >
       {children}

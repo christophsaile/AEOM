@@ -1,42 +1,56 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, Modal } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import colors from '../config/colors';
 import fontSize from '../config/fontSize';
 import { GlobalStateContext } from '../globalStateContext';
+import { IArticleFields } from '../types/generated/contentful';
+import { client } from '../config/contentfulClient';
 
 const Sort = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [active, setActive] = useState(0);
-  const { unfilteredArticles, setUnfilteredArticles } = useContext(GlobalStateContext);
+  const { setFilteredArticles, setActiveSort, activeSort, activeFilter } = useContext(
+    GlobalStateContext
+  );
 
   const data = [
-    { index: 0, text: 'latest unfilteredArticles', action: 'latestA' },
-    { index: 1, text: 'oldest unfilteredArticles', action: 'oldestA' },
-    { index: 2, text: 'shortest reading time', action: 'shortestRT' },
+    { index: 0, text: 'recent articles', action: '-sys.updatedAt' },
+    { index: 1, text: 'oldest articles', action: 'sys.updatedAt' },
+    { index: 2, text: 'shortest reading time', action: '' },
   ];
 
+  useEffect(() => {
+    fetchData();
+  }, [activeSort]);
+
   const sortData = (action: string) => {
-    if (unfilteredArticles?.items) {
-      switch (action) {
-        case 'latestA':
-          break;
-        case 'oldestA':
-          const sortData = unfilteredArticles.items.sort((a, b) => {
-            const dateA = new Date(a.sys.updatedAt).valueOf();
-            const dateB = new Date(b.sys.updatedAt).valueOf();
-            return dateA - dateB;
-          });
-          break;
-        case 'shortestRT':
-          break;
-      }
-    } else {
-      console.log('no items found to filter');
-    }
+    setActiveSort(action);
   };
 
+  const fetchData = () => {
+    activeFilter === null
+      ? client
+          .getEntries<IArticleFields>({
+            content_type: 'article',
+            order: activeSort,
+          })
+          .then((response) => {
+            setFilteredArticles(response);
+          })
+          .catch(console.error)
+      : client
+          .getEntries<IArticleFields>({
+            content_type: 'article',
+            'fields.category': activeFilter,
+            order: activeSort,
+          })
+          .then((response) => {
+            setFilteredArticles(response);
+          })
+          .catch(console.error);
+  };
   return (
     <>
       <MaterialCommunityIcons

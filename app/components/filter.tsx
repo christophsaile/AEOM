@@ -1,25 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, Text, ScrollView, View } from 'react-native';
 
 import colors from '../config/colors';
 import fontSize from '../config/fontSize';
-import { GlobalStateContext } from '../globalStateContext';
-import { client } from '../config/contentfulClient';
 import { IArticleFields } from '../types/generated/contentful';
+import { client } from '../config/contentfulClient';
+import { GlobalStateContext } from '../globalStateContext';
 
 const Filter = () => {
-  const { unfilteredArticles, setFilteredArticles } = useContext(GlobalStateContext);
+  const {
+    unfilteredArticles,
+    activeSort,
+    activeFilter,
+    setFilteredArticles,
+    setActiveFilter,
+  } = useContext(GlobalStateContext);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = React.useState<number | null>(null);
-
-  const fetchCategoryItems = (category: string) => {
-    client
-      .getEntries<IArticleFields>({
-        content_type: 'article',
-        'fields.category': category,
-      })
-      .then((response) => setFilteredArticles(response))
-      .catch(console.error);
-  };
 
   const getAllCategorys = (): string[] => {
     let categorys: string[] = [];
@@ -29,29 +25,55 @@ const Filter = () => {
     const uniqueCategorys = categorys.filter((value, index, self) => {
       return self.indexOf(value) === index;
     });
-
     return uniqueCategorys;
   };
 
-  const handleFilterClick = (item: string, index: number) => {
+  const fetchData = () => {
+    activeFilter === null
+      ? client
+          .getEntries<IArticleFields>({
+            content_type: 'article',
+            order: activeSort,
+          })
+          .then((response) => {
+            setFilteredArticles(response);
+          })
+          .catch(console.error)
+      : client
+          .getEntries<IArticleFields>({
+            content_type: 'article',
+            'fields.category': activeFilter,
+            order: activeSort,
+          })
+          .then((response) => {
+            setFilteredArticles(response);
+          })
+          .catch(console.error);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [activeFilter]);
+
+  const handleFilterClick = (category: string, index: number) => {
     if (selectedCategoryIndex === index) {
-      setFilteredArticles(unfilteredArticles);
+      setActiveFilter(null);
       setSelectedCategoryIndex(null);
     } else {
-      fetchCategoryItems(item);
+      setActiveFilter(category);
       setSelectedCategoryIndex(index);
     }
   };
 
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.container}>
-      {getAllCategorys().map((item, index) => {
+      {getAllCategorys().map((category, index) => {
         return (
           <TouchableOpacity
             key={index}
             activeOpacity={0.8}
             style={styles.filter}
-            onPress={() => handleFilterClick(item, index)}
+            onPress={() => handleFilterClick(category, index)}
           >
             <Text
               style={[
@@ -59,7 +81,7 @@ const Filter = () => {
                 { color: selectedCategoryIndex === index ? colors.blue : colors.grey },
               ]}
             >
-              {item}
+              {category}
             </Text>
           </TouchableOpacity>
         );
