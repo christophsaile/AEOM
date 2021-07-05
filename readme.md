@@ -1,3 +1,12 @@
+# Getting Started
+
+  ```
+  npm install -g expo-cli
+  npm i
+  npm start
+  ```
+
+
 # Checkliste Status-Meeting
 
 ## Anwendungsfall
