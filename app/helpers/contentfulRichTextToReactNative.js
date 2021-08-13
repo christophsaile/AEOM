@@ -30,7 +30,12 @@ export const contentfulRichTextToReactNative = {
     [BLOCKS.PARAGRAPH]: (_node, children) => {
       return (
         <Text
-          style={{ fontSize: fontSize.text, lineHeight: fontSize.text * 1.4, marginBottom: 10 }}
+          style={{
+            textAlign: 'justify',
+            fontSize: fontSize.text,
+            lineHeight: fontSize.text * 1.4,
+            marginBottom: 10,
+          }}
         >
           {children}
         </Text>
